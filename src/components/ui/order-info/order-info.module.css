@@ -2,8 +2,13 @@
   margin: 0 auto;
   width: 640px;
 }
-.number {
+
+.numberCenter {
   text-align: center;
+}
+
+.numberLeft {
+  text-align: left;
 }
 
 .status {

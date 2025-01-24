@@ -8,6 +8,7 @@ import {
 } from '../../../src/services/slices/UserOrderHistorySlice';
 import { useDispatch, useSelector } from '../../../src/services/store';
 import { Preloader } from '@ui';
+import { getAllFeeds } from '../../../src/services/slices/FeedDataSlice';
 
 export const ProfileOrders: FC = () => {
   const orders: TOrder[] = useSelector(getOrdersHistory);

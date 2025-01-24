@@ -22,12 +22,17 @@ const initialState: TFeedState = {
 
 export const getAllFeeds = createAsyncThunk('feed/getAll', getFeedsApi);
 
+// export const getOrderByNumber = createAsyncThunk(
+//   'feed/getOrder',
+//   async (number: number) => {
+//     const response = await getOrderByNumberApi(number);
+//     return response;
+//   }
+// );
+
 export const getOrderByNumber = createAsyncThunk(
-  'feed/getOrder',
-  async (number: number) => {
-    const response = await getOrderByNumberApi(number);
-    return response;
-  }
+  'order/byNumber',
+  async (number: number) => getOrderByNumberApi(number)
 );
 
 export const feedDataSlice = createSlice({

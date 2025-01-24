@@ -5,20 +5,22 @@ import { TIngredient } from '@utils-types';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../../src/services/store';
 import {
+  getFeedLoading,
   getOrderByNum,
   getOrderByNumber
 } from '../../../src/services/slices/FeedDataSlice';
 import { getSelectedIngredients } from '../../../src/services/slices/IngredientsSlice';
 
 export const OrderInfo: FC = () => {
-  const number = Number(useParams());
+  const ordernumber = Number(useParams().number);
   const dispatch = useDispatch();
 
   const orderData = useSelector(getOrderByNum);
+  const loading = useSelector(getFeedLoading);
 
   useEffect(() => {
-    dispatch(getOrderByNumber(number));
-  }, []);
+    dispatch(getOrderByNumber(ordernumber));
+  }, [dispatch]);
 
   const ingredients: TIngredient[] = useSelector(getSelectedIngredients);
 
@@ -64,7 +66,7 @@ export const OrderInfo: FC = () => {
     };
   }, [orderData, ingredients]);
 
-  if (!orderInfo) {
+  if (!orderInfo || loading) {
     return <Preloader />;
   }
 
