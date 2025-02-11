@@ -34,6 +34,8 @@ afterEach(() => {
 
 describe('Добавление ингредиента', () => {
     it('Добавляет булку и начинку', () => {
+      cy.get(constructor).should('not.contain', 'ingredient-1');
+      cy.get(constructor).should('not.contain', 'ingredient-2');
       cy.get('[data-cy="1"]').children('button').click();
       cy.get('[data-cy="2"]').children('button').click();
       cy.get(constructor).should('contain', 'ingredient-1');
@@ -42,8 +44,10 @@ describe('Добавление ингредиента', () => {
 
   describe('Модальные окна', () => {
     it('Открытие модального окна', () => {
+      cy.get(modal).should('not.exist');
       cy.get('[data-cy="1"]').click();
       cy.get(modal).should('be.visible');
+      cy.get(modal).should('contain', 'ingredient-1'); 
     });
     it('Закрытие модального окна по крестику', () => {
       cy.get('[data-cy="2"]').click();
@@ -61,6 +65,8 @@ describe('Добавление ингредиента', () => {
 
   describe('Создание заказа', () => {
     it('Создает заказ и проверяет, что конструктор пуст после закрытия модалки', () => {
+      cy.get(constructor).should('not.contain', 'ingredient-1');
+      cy.get(constructor).should('not.contain', 'ingredient-2');
       cy.get('[data-cy="1"]').children('button').click();
       cy.get('[data-cy="2"]').children('button').click();
       cy.get(constructor).should('contain', 'ingredient-1');
