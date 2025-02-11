@@ -2,7 +2,7 @@ import { getFeedsApi, getOrderByNumberApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
 
-type TFeedState = {
+export type TFeedState = {
   orders: TOrder[];
   total: number;
   totalToday: number;
@@ -21,14 +21,6 @@ const initialState: TFeedState = {
 };
 
 export const getAllFeeds = createAsyncThunk('feed/getAll', getFeedsApi);
-
-// export const getOrderByNumber = createAsyncThunk(
-//   'feed/getOrder',
-//   async (number: number) => {
-//     const response = await getOrderByNumberApi(number);
-//     return response;
-//   }
-// );
 
 export const getOrderByNumber = createAsyncThunk(
   'order/byNumber',
