@@ -11,7 +11,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
 import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
 
-type TStateUser = {
+export type TStateUser = {
   isAuthChecked: boolean;
   isAuthenticated: boolean;
   user: TUser | null;
@@ -53,14 +53,27 @@ export const userLogIn = createAsyncThunk(
   }
 );
 
-export const userLogOut = createAsyncThunk('user/logOut', async () => {
-  const response = await logoutApi();
+// export const userLogOut = createAsyncThunk('user/logOut', async () => {
+//   const response = await logoutApi();
 
-  deleteCookie('acessToken');
-  localStorage.clear;
+//   deleteCookie('acessToken');
+//   localStorage.clear();
 
-  return response;
-});
+//   return response;
+// });
+
+export const userLogOut = createAsyncThunk(
+  'user/logout',
+  async (_, { rejectWithValue }) => {
+    try {
+      await logoutApi();
+      deleteCookie('accessToken');
+      localStorage.clear();
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 
 export const userUpdate = createAsyncThunk('user/undate', updateUserApi);
 
